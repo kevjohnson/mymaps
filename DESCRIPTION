@@ -1,8 +1,15 @@
 Package: mymaps
 Title: My Maps Package
-Description: I got tired of making maps all the time so I made a package that does it for me.
+Description: I got tired of making maps all the time so I made a package that
+    does it for me.
 Version: 0.1
 Author: Kevin Johnson <kej.johnson@gmail.com>
-Imports: maptools, ggplot2, scales, Cairo, RColorBrewer, fields
+Imports:
+    maptools,
+    ggplot2,
+    scales,
+    Cairo,
+    RColorBrewer,
+    fields
 License: MIT
 LazyData: true
