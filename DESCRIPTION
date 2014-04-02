@@ -10,6 +10,7 @@ Imports:
     scales,
     Cairo,
     RColorBrewer,
-    fields
+    fields,
+    rgeos
 License: MIT
 LazyData: true

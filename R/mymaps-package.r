@@ -2,4 +2,10 @@
 #'
 #' @name mymaps
 #' @docType package
-NULL
+require(maptools)
+require(ggplot2)
+require(scales)
+require(Cairo)
+require(RColorBrewer)
+require(fields)
+require(rgeos)
