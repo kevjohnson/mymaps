@@ -2,12 +2,12 @@
 #'
 #' This function takes in a dataframe, shapefile path,
 #' and variable and outputs a .png file
-#' 
+#'
 #' @param data dataframe with the data you want to plot
 #' @param map dataframe with map data (after using fortify())
 #' @param var string with variable in the dataframe that you want to plot
 #' @param id string with id variable in the dataframe (e.g. "geoid")
-#' @param colors color scale to use with scale_fill_gradientn(), defaults 
+#' @param colors color scale to use with scale_fill_gradientn(), defaults
 #' to tim.colors(100)
 #' @param title string with title of the map, defaults to blank
 #' @param fill_label string with a label for a legend, defaults to blank
@@ -15,7 +15,7 @@
 #' @param width defaults to 7
 #' @param height defaults to 7
 #' @param per TRUE if labels are a percentage (0.2 -> 20%), defaults to FALSE
-#' @param projection method of projection, takes in Mercator or Albers 
+#' @param projection method of projection, takes in Mercator or Albers
 #' (Albers requires lat0 and lat1 arguments)
 #' @param proj_args any arguments necessary for the projection method
 #' @export
