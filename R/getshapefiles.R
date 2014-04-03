@@ -42,24 +42,5 @@ getUSCounty <- function(state = NULL, region = c("GEO_ID", "STATE", "COUNTY", "N
 }
 
 
-setwd("/home/kevin/Copy/Data/Shapefiles")
-fips <- read.csv("statefips.csv", stringsAsFactors=F)
-fips <- fips[-c(4,13,42,50),]
-fips$code <- substring(as.character(fips$FIPS.Code+100),2,3)
-for (i in 1:length(fips$code)){
-    temp <- tempfile()
-    url <- paste("http://www2.census.gov/geo/tiger/GENZ2010/gz_2010_", fips$code[i], "_140_00_500k.zip", sep="")
-    download.file(url, temp)
-    unzip(temp, exdir=paste(fips[i,1], "Tract", sep=""))
-}
 
-for (i in 1:length(fips$code)){
-    temp <- tempfile()
-    url <- paste("http://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_", fips$code[i], "_zcta510.zip", sep="")
-    download.file(url, temp)
-    unzip(temp, exdir=paste(fips[i,1], "Zip", sep=""))
-}
-
-for (i in 1:length(fips$code)){
-    as.name(paste(fips[i,1], "Tract", sep="")) <- readShapeSpatial()
-}
+# getStateTract <- function(state, region = )
