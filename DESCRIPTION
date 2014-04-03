@@ -4,7 +4,8 @@ Description: I got tired of making maps all the time so I made a package that
     does it for me.
 Version: 0.1
 Author: Kevin Johnson <kej.johnson@gmail.com>
-Imports:
+Maintainer: Kevin Johnson <kej.johnson@gmail.com>
+Depends:
     maptools,
     ggplot2,
     scales,

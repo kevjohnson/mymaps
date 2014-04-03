@@ -1,0 +1,28 @@
+\name{getStateTract}
+\alias{getStateTract}
+\title{Retrieves shapefile for state census tracts}
+\usage{
+getStateTract(state, directory = "shapefiles", region = c("GEO_ID", "STATE",
+  "COUNTY", "TRACT", "NAME", "LSAD", "CENSUSAREA"))
+}
+\arguments{
+  \item{state}{string with the abbreviation of the state
+  (e.g. "GA")}
+
+  \item{directory}{directory where shapefiles are located,
+  or directory for shapefiles to be downloaded into,
+  defaults to "shapefiles"}
+
+  \item{region}{region to use with the fortify() function,
+  defaults to "GEO_ID". Choices are "GEO_ID", "STATE",
+  "COUNTY", "TRACT", "NAME", "LSAD", "CENSUSAREA".}
+}
+\description{
+This function returns a dataframe with map data for every
+census tract in a particular state.
+}
+\examples{
+map <- getStateTract("GA")
+makemap(data=d, map = map, var="obese", id="geoid", per=TRUE)
+}
+

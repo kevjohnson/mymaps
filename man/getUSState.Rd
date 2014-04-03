@@ -1,0 +1,20 @@
+\name{getUSState}
+\alias{getUSState}
+\title{Retrieves shapefile for US states}
+\usage{
+getUSState(region = c("STATE", "GEO_ID", "NAME", "LSAD", "CENSUSAREA"))
+}
+\arguments{
+  \item{region}{region to use with the fortify() function,
+  defaults to "STATE". Choices are "GEO_ID", "STATE",
+  "NAME", "LSAD", "CENSUSAREA".}
+}
+\description{
+This function returns a dataframe with map data for every
+state in the US.
+}
+\examples{
+map <- getUS()
+makemap(data=d, map = map, var="obese", id="geoid", per=TRUE)
+}
+
