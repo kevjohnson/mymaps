@@ -13,4 +13,3 @@ Imports:
     fields,
     rgeos
 License: MIT
-LazyData: true
