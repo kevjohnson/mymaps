@@ -47,6 +47,8 @@ getUSCounty <- function(state = NULL, region = c("GEO_ID", "STATE", "COUNTY", "N
 #' every census tract in a particular state.
 #'
 #' @param state string with the abbreviation of the state (e.g. "GA")
+#' @param directory directory where shapefiles are located, or directory
+#' for shapefiles to be downloaded into, defaults to "shapefiles"
 #' @param region region to use with the fortify() function, defaults to "GEO_ID".
 #' Choices are "GEO_ID", "STATE", "COUNTY", "TRACT", "NAME", "LSAD", "CENSUSAREA".
 #' @export
@@ -54,23 +56,25 @@ getUSCounty <- function(state = NULL, region = c("GEO_ID", "STATE", "COUNTY", "N
 #' map <- getStateTract("GA")
 #' makemap(data=d, map = map, var="obese", id="geoid", per=TRUE)
 
-getStateTract <- function(state, region = c("GEO_ID", "STATE", "COUNTY", "TRACT", "NAME", "LSAD", "CENSUSAREA")){
+getStateTract <- function(state, directory = "shapefiles", region = c("GEO_ID", "STATE", "COUNTY", "TRACT", "NAME", "LSAD", "CENSUSAREA")){
     reg <- match.arg(region)
     data(stateFIPS)
     state <- match.arg(state, choices = fips[,1])
     stateData <- fips[fips[,1] == state,]
-    temp <- tempfile()
-    url <- paste("http://www2.census.gov/geo/tiger/GENZ2010/gz_2010_", stateData$code, "_140_00_500k.zip", sep="")
-    message("Downloading file...")
-    download.file(url, temp)
-    message("Unzipping file...")
-    shp <- unzip(temp, exdir = "shapefiles")
+    file <- paste(directory, "/gz_2010_", stateData$code, "_140_00_500k.shp", sep="")
+    if (!file.exists(file)){
+        temp <- tempfile()
+        url <- paste("http://www2.census.gov/geo/tiger/GENZ2010/gz_2010_", stateData$code, "_140_00_500k.zip", sep="")
+        message("Downloading file...")
+        download.file(url, temp)
+        message("Unzipping file...")
+        unzip(temp, exdir = directory)
+        unlink(temp)
+    }
     message("Reading file...")
-    file <- paste("shapefiles/gz_2010_", stateData$code, "_140_00_500k.shp", sep="")
     m <- readShapeSpatial(file)
     message("Fortifying dataframe...")
     m <- fortify(m, region = reg)
-    unlink(temp)
     return(m)
 }
 
@@ -80,6 +84,8 @@ getStateTract <- function(state, region = c("GEO_ID", "STATE", "COUNTY", "TRACT"
 #' every zip code in a particular state.
 #'
 #' @param state string with the abbreviation of the state (e.g. "GA")
+#' @param directory directory where shapefiles are located, or directory
+#' for shapefiles to be downloaded into, defaults to "shapefiles"
 #' @param region region to use with the fortify() function, defaults to "ZCTA5CE10".
 #' Choices are "ZCTA5CE10", "STATEFP10", "GEOID10", "CLASSFP10".
 #' @export
@@ -87,22 +93,24 @@ getStateTract <- function(state, region = c("GEO_ID", "STATE", "COUNTY", "TRACT"
 #' map <- getStateZip("GA")
 #' makemap(data=d, map = map, var="obese", id="geoid", per=TRUE)
 
-getStateZip <- function(state, region = c("ZCTA5CE10", "STATEFP10", "GEOID10", "CLASSFP10")){
+getStateZip <- function(state, directory = "shapefiles", region = c("ZCTA5CE10", "STATEFP10", "GEOID10", "CLASSFP10")){
     reg <- match.arg(region)
     data(stateFIPS)
     state <- match.arg(state, choices = fips[,1])
     stateData <- fips[fips[,1] == state,]
-    temp <- tempfile()
-    url <- paste("http://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_", stateData$code, "_zcta510.zip", sep="")
-    message("Downloading file...")
-    download.file(url, temp)
-    message("Unzipping file...")
-    shp <- unzip(temp, exdir = "shapefiles")
+    file <- paste(directory, "/tl_2010_", stateData$code, "_zcta510.shp", sep="")
+    if (!file.exists(file)){
+        temp <- tempfile()
+        url <- paste("http://www2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_", stateData$code, "_zcta510.zip", sep="")
+        message("Downloading file...")
+        download.file(url, temp)
+        message("Unzipping file...")
+        unzip(temp, exdir = directory)
+        unlink(temp)
+    }
     message("Reading file...")
-    file <- paste("shapefiles/tl_2010_", stateData$code, "_zcta510.shp", sep="")
     m <- readShapeSpatial(file)
     message("Fortifying dataframe...")
     m <- fortify(m, region = reg)
-    unlink(temp)
     return(m)
 }
