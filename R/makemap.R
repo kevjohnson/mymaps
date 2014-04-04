@@ -16,6 +16,8 @@
 #' @param height defaults to 7
 #' @param per TRUE if labels are a percentage (0.2 -> 20%), defaults to FALSE
 #' @param projection method of projection, takes in Mercator or Albers
+#' @param border optional parameter if you want different borders
+#' (i.e. census tract data with county borders)
 #' (Albers requires lat0 and lat1 arguments)
 #' @param proj_args any arguments necessary for the projection method
 #' @export
@@ -25,10 +27,15 @@
 makeMap <- function(data, map, var, id, colors = tim.colors(100),
                     title = "", fill_label = "", output = "out.png",
                     width = 7, height = 7, per = FALSE,
-                    projection = c("mercator", "albers"), proj_args = NULL){
+                    projection = c("mercator", "albers"), proj_args = NULL,
+                    border = NULL){
     p <- ggplot()
     p <- p + geom_map(data = data, aes_string(map_id = id, fill = var), map = map)
-    p <- p + geom_path(data = map, aes(x = long, y = lat, group = group), colour = "black", size = 0.25)
+    if (is.null(border)) {
+        p <- p + geom_path(data = map, aes(x = long, y = lat, group = group), colour = "black", size = 0.25)
+    } else {
+        p <- p + geom_path(data = border, aes(x = long, y = lat, group = group), colour = "black", size = 0.25)
+    }
     if (per){
         p <- p + scale_fill_gradientn(colours = colors, labels = percent)
     } else {
