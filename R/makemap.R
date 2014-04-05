@@ -32,7 +32,7 @@ makeMap <- function(data, map, var, id, colors = tim.colors(100),
     p <- ggplot()
     p <- p + geom_map(data = data, aes_string(map_id = id, fill = var), map = map)
     if (is.null(border)) {
-        p <- p + geom_path(data = map, aes(x = long, y = lat, group = group), colour = "black", size = 0.25)
+        p <- p + geom_path(dcata = map, aes(x = long, y = lat, group = group), colour = "black", size = 0.25)
     } else {
         p <- p + geom_path(data = border, aes(x = long, y = lat, group = group), colour = "black", size = 0.25)
     }
