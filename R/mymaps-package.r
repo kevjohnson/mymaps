@@ -2,7 +2,7 @@
 #'
 #' @name mymaps
 #' @docType package
-require(maptools)
+require(rgdal)
 require(ggplot2)
 require(scales)
 require(Cairo)

@@ -29,10 +29,11 @@ makeMap <- function(data, map, var, id, colors = tim.colors(100),
                     width = 7, height = 7, per = FALSE,
                     projection = c("mercator", "albers"), proj_args = NULL,
                     border = NULL){
+    proj <- match.arg(projection)
     p <- ggplot()
     p <- p + geom_map(data = data, aes_string(map_id = id, fill = var), map = map)
     if (is.null(border)) {
-        p <- p + geom_path(dcata = map, aes(x = long, y = lat, group = group), colour = "black", size = 0.25)
+        p <- p + geom_path(data = map, aes(x = long, y = lat, group = group), colour = "black", size = 0.25)
     } else {
         p <- p + geom_path(data = border, aes(x = long, y = lat, group = group), colour = "black", size = 0.25)
     }
@@ -41,7 +42,6 @@ makeMap <- function(data, map, var, id, colors = tim.colors(100),
     } else {
         p <- p + scale_fill_gradientn(colours = colors)
     }
-    proj <- match.arg(projection)
     if (proj == "mercator"){
         p <- p + coord_map(projection = "mercator")
     } else {
