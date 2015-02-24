@@ -11,6 +11,7 @@ Depends:
     scales,
     Cairo,
     ggmap,
-    rgeos
+    rgeos,
+    dplyr
 License: MIT + file LICENSE
 BugReports: https://github.com/kevjohnson/mymaps/issues
