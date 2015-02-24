@@ -13,6 +13,7 @@
 getUSState <- function(region = c("STATE", "GEO_ID", "NAME", "LSAD", "CENSUSAREA")){
     data(USState)
     reg <- match.arg(region)
+    m <- m[!(m$STATE %in% c("66", "72", "02", "15")),]
     m <- fortify(m, region = reg)
     return(m)
 }
@@ -37,6 +38,7 @@ getUSCounty <- function(state = NULL, region = c("GEO_ID", "STATE", "COUNTY", "N
     if (!is.null(state)){
         m <- m[m$NAME == state,]
     }
+    m <- m[!(m$STATE %in% c("66", "72", "02", "15")),]
     m <- fortify(m, region = reg)
     return(m)
 }
@@ -72,7 +74,7 @@ getStateTract <- function(state, directory = "shapefiles", region = c("GEO_ID", 
         unlink(temp)
     }
     message("Reading file...")
-    m <- readShapeSpatial(file)
+    m <- readOGR(dsn = directory, layer = paste("gz_2010_", stateData$code, "_140_00_500k", sep = ""))
     message("Fortifying dataframe...")
     m <- fortify(m, region = reg)
     return(m)
@@ -109,7 +111,7 @@ getStateZip <- function(state, directory = "shapefiles", region = c("ZCTA5CE10",
         unlink(temp)
     }
     message("Reading file...")
-    m <- readShapeSpatial(file)
+    m <- readOGR(dsn = directory, layer = paste("tl_2010_", stateData$code, "_zcta510", sep = ""))
     message("Fortifying dataframe...")
     m <- fortify(m, region = reg)
     return(m)
