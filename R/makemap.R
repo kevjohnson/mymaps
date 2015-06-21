@@ -28,7 +28,13 @@
 #' @param additional_layers Add additional ggplot layers to customize the chart.
 #' @export
 #' @examples
-#' makemap(data=d, map = map)
+#' county <- getUSCounty()
+#' data <- data.frame(id = unique(county$id))
+#' data$var <- runif(nrow(data))
+#' makeMap(data = data, map = county,
+#'     projection = "lambert", proj_args = c(33,45),
+#'     output = "out.png", width = 7, height = 4,
+#'     additional_layers = theme(legend.position = c(1,0), legend.justification = c(1,0)))
 
 makeMap <- function(data, map, palette = "Greens",
                     title = "", fill_label = "", output = "out.png",
