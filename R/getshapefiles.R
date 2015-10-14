@@ -36,7 +36,7 @@ getUSCounty <- function(state = NULL, region = c("GEO_ID", "STATE", "COUNTY", "N
     data(USCounty)
     reg <- match.arg(region)
     if (!is.null(state)){
-        m <- m[m$NAME == state,]
+        m <- m[m$STATE == state,]
     }
     m <- m[!(m$STATE %in% c("66", "72", "02", "15")),]
     m <- fortify(m, region = reg)
