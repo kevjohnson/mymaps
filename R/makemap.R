@@ -5,7 +5,7 @@
 #'
 #' @param data Dataframe with the data you want to plot.  Must have
 #' two columns with the first column called "id" matching up with the
-#' "id" column in the map dataframe.
+#' "id" column in the map dataframe.  Here's a change.
 #' @param map Dataframe with shapefile data (after using fortify()).
 #' @param palette Color Brewer palette to use (http://colorbrewer2.org/).
 #' @param title String with title of the map, defaults to blank.
