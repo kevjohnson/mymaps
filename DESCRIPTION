@@ -12,6 +12,7 @@ Depends:
     Cairo,
     ggmap,
     rgeos,
-    dplyr
+    dplyr,
+    maptools
 License: MIT + file LICENSE
 BugReports: https://github.com/kevjohnson/mymaps/issues
